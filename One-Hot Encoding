@@ -1,7 +1,7 @@
 import pandas as pd
 # first we will creat a sample dataset
 data = {
-         "Student Name" : ["Ansh Gupta","Aryan Mishra","Sakshi Gopal Pandey","Rohit Sharma","David",],
+         "Student Name" : ["Ansh Gupta","Aryan Mishra","Sakshi Gopal Pandey","Rohit Sharma","David"],
          "Branch"       : ["Mathematics and computing","Information technology","Computer Science","Mathematics and computing","Computer Science"]
         }
 df = pd.DataFrame(data)
