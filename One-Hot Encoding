@@ -1,0 +1,25 @@
+import pandas as pd
+# first we will creat a sample dataset
+data = {
+         "Student Name" : ["Ansh Gupta","Aryan Mishra","Sakshi Gopal Pandey","Rohit Sharma","David",],
+         "Branch"       : ["Mathematics and computing","Information technology","Computer Science","Mathematics and computing","Computer Science"]
+        }
+df = pd.DataFrame(data)
+print("Orignal Dataset")
+print(df)
+# Now we will figure out how many unique branch are there
+unique_branch = df["Branch"].unique()
+print("\nUnique Branch:", unique_branch)
+
+# Now we have to create new columns for each branch
+for items in unique_branch:
+    df[items]=0
+# Now we will fill 1 in the branch column where student belongs to
+for i in range(len(df)):
+    branch_name = df.loc[i, "Branch"]
+    df.loc[i, branch_name] = 1
+print("\nOne Hot Encoded Dataset")
+print(df)
+
+
+
