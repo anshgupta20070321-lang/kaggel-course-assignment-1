@@ -1,0 +1,24 @@
+import pandas as pd
+# first we will create a sample dataset
+data = {
+        "Customer" : ["Ansh Gupta","Aryan Mishra","Sakshi Gopal Pandey","Rohit Sharma","David","Henry"],
+        "Feedback" : ["Very Satisfied", "Dissatisfied", "Neutral", "Satisfied", "Very Dissatisfied", "Neutral"]
+}
+df=pd.DataFrame(data)
+print("Orignal Dataset")
+print(df)
+
+# Now we will set the order of feedback
+Feedback_order = {"Very Dissatisfied" : 1,
+                  "Dissatisfied"      : 2,
+                  "Neutral"           : 3,
+                  "Satisfied"         : 4,
+                  "Very Satisfied"    : 5}
+# Now we will encode the data
+encoded_feedback = []
+for val in df["Feedback"]:
+    encoded_feedback.append(Feedback_order[val])
+
+df["Feedback_Encoded"] = encoded_feedback
+print("\nOrdinal Encoded Dataset")
+print(df)
