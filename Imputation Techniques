@@ -1,0 +1,51 @@
+import pandas as pd
+import numpy as np
+
+#first we will create a sample dataset
+data = {
+    "Name": ["Ansh Gupta","Aryan Mishra","Sakshi Gopal Pandey","Rohit Sharma","David","henry"],
+    "Math_Score": [85, 90, np.nan, 70, 88, np.nan],
+    "Science_Score": [78, np.nan, 80, 65, np.nan, 75],
+    "Attendance (%)": [95, 90, np.nan, 80, 85, 88]
+}
+df = pd.DataFrame(data)
+print("Original Dataset with Missing Values:")
+print(df)
+
+# now we will ask our user to choose which imputation methode he wants to use
+print("\nChoose Imputation Method:")
+print("1. Mean Imputation")
+print("2. Median Imputation")
+choice = input("Enter your choice (1/2): ")
+
+# now we will define functions to calculate mean and median
+def finding_mean(values):
+    valid_values = [x for x in values if not np.isnan(x)]
+    return sum(valid_values) / len(valid_values)
+
+def finding_median(values):
+    valid_values = sorted([x for x in values if not np.isnan(x)])
+    n = len(valid_values)
+    mid = n // 2
+    if n % 2 == 0:
+        return (valid_values[mid - 1] + valid_values[mid]) / 2
+    else:
+        return valid_values[mid]
+
+# now we will apply the imputation methode choosen by user
+for column in df.columns[1:]:  # skipping the 'Name' column as np.isnan will raise error for non-numeric data types
+    if choice == '1':
+        impute_value = finding_mean(df[column])
+        method = "Mean"
+    elif choice == '2':
+        impute_value = finding_median(df[column])
+        method = "Median"
+    else:
+        print("Invalid choice. Exiting.")
+        exit()
+    
+    # now we will replace NaN values
+    df[column] = [impute_value if np.isnan(x) else x for x in df[column]]
+
+print(f"\nDataset after {method} Imputation:")
+print(df)  
